@@ -1,18 +1,32 @@
-#ISIS1225 - Librerias de soporte
+# Reto No. 2 :clapper:
 
-Este proyecto contiene los Tipos abstractos de datos, estructuras de datos y algoritmos requeridos por el curso ISIS1225-Estructuras de Datos y Algoritmos
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-blue)](https://www.python.org/)
+[![Visits Badge](https://badges.pufler.dev/visits/EDA2021-1-SEC04-G10/Reto2-G10)](https://badges.pufler.dev)
+[![Updated Badge](https://badges.pufler.dev/updated/EDA2021-1-SEC04-G10/Reto2-G10)](https://badges.pufler.dev)
 
--Lib
-Este directorio contiene todo el código de base que se entrega para el funcionamiento del curso.  Dentro de este directorio encuentran:
-    
-    |-- ADT:  Directorio con los Tipos Abstractos de Datos del curso
+## Autores :writing_hand:
+* Hernán Buitrago - Req :two:
+  * hf.buitrago10@uniandes.edu.co
+  * 201512807
+* Daniel Aguilera - Req :three:
+  * d.aguilera@uniandes.edu.co
+  * 202010592
 
-    |--DataStructures: Directorio con todas las estructuras de datos y archivos auxiliares para su     correcto funcionamiento
+## Descripción :page_facing_up:
 
-    |--Algorithms: Implementación de los algoritmos vistos en el curso (por ejemplo algoritmos de ordenamiento)
+La estructura del repositorio es la siguiente:
 
-    |-- Utils: Funciones auxiliares para el funcionamiento de los TADs y estructuras de datos
+* App: Este directorio contiene los archivos python desarrollados.
+* Data: Este directorio contiene los datos de prueba.
+* Docs: Este directorio contiene los documentos anexos al proyecto donde se explican las decisiones de diseño, análisis de algoritmos y en general toda la información asociada al código desarrollado.
+* DiscLib: Este directorio contiene el código base que se entrega para el funcionamiento del curso. Dentro de este directorio se encuentran:
 
--Test
-Este directorio contiene las pruebas realizadas a los TADs, Estructuras de Datos y Algoritmos.
+```
+|-- ADT: Directorio con los Tipos Abstractos de Datos del curso.
 
+|-- DataStructures: Directorio con todas las estructuras de datos y archivos auxiliares para su correcto funcionamiento.
+
+|-- Algorithms: Implementación de los algoritmos vistos en el curso.
+
+|-- Utils: Funciones auxiliares para el funcionamiento de los TADs y las estructuras de datos.
+```
