@@ -2,7 +2,6 @@
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-blue)](https://www.python.org/)
 [![Visits Badge](https://badges.pufler.dev/visits/EDA2021-1-SEC04-G10/Reto2-G10)](https://badges.pufler.dev)
-[![Updated Badge](https://badges.pufler.dev/updated/EDA2021-1-SEC04-G10/Reto2-G10)](https://badges.pufler.dev)
 
 ## Autores :writing_hand:
 * Hernán Buitrago - Req :two:
