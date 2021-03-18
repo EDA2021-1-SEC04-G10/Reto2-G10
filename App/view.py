@@ -41,6 +41,27 @@ def printMenu():
 
 catalog = None
 
+def initCatalog():
+    """
+    Inicializa el catálogo de videos
+    """
+    return controller.initCatalog()
+
+def loadData(catalog):
+    """
+    Carga la información de los videos al catálogo
+    """
+    controller.loadData(catalog)
+
+def printFirstVideo(catalog):
+    """
+    Imprime la información del primer video de la lista
+    """
+    firstVideo = lt.firstElement(catalog['videos'])
+    print("El primer video cargado es: ")
+    print("Título: " + firstVideo['title'] + "  Canal: " + firstVideo['channel_title'] +
+    "  Fecha de tendencia: " + firstVideo['trending_date'] + "  País: " + firstVideo['country'] +
+    "  Views: " + firstVideo['views'] + "  Likes: " + firstVideo['likes'] + "  Dislikes: " + firstVideo['dislikes'])
 """
 Menu principal
 """
@@ -49,10 +70,14 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-
+        catalog = initCatalog()
+        loadData(catalog)
+        print("El número de videos cargados es: " + str(lt.size(catalog['videos'])))
+        printFirstVideo(catalog)
+        printCategoryList(catalog)
     elif int(inputs[0]) == 2:
-        pass
-
+        categoryname = str(input("Ingrese la categoría\n"))
+        categoryid = controller.getCategoryId(catalog, categoryname)
     else:
         sys.exit(0)
 sys.exit(0)
