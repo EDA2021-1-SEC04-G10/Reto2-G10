@@ -26,46 +26,78 @@ import csv
 
 
 """
-El controlador se encarga de mediar entre la vista y el modelo.
+El controlador se encarga de mediar entre la vista y el modelo
 """
 
-# Inicialización del Catálogo de libros
+# Inicialización del catálogo de libros
+
 def initCatalog():
     """
-    Llama la función de inicialización del catalogo al modelo
+    Llama la función de inicialización del catálogo al modelo
     """
     catalog = model.newCatalog()
     return catalog
-
+    
 # Funciones para la carga de datos
+
+def loadData(catalog):
+    """
+    Carga los datos de los archivos y carga los datos
+    en las estructuras de datos
+    """
+    loadVideos(catalog)
+    loadCategory(catalog)
+
 def loadVideos(catalog):
     """
-    Carga los videos del archivo
+    Carga los videos del archivo. Por cada video se indica al
+    modelo que debe adicionarlo al catálogo
     """
     videosfile = cf.data_dir + 'videos/videos-large.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
 
-def loadCategoryId(catalog):
+def loadCategory(catalog):
     """
-    Carga las categorías del archivo
+    Carga las categorías del archivo. Por cada categoría se indica al
+    modelo que debe adicionarla al catálogo
     """
     categoryidfile = cf.data_dir + 'videos/category-id.csv'
     input_file = csv.DictReader(open(categoryidfile, encoding='utf-8'), delimiter='\t')
-    for categoryid in input_file:
-        model.addCategory(catalog, categoryid)
+    for category in input_file:
+        model.addCategory(catalog, category)
 
 # Funciones de ordenamiento
 
 def sortVideosByLikes(catalog):
     """
-    Ordena los videos por 'likes'
+    Ordena el catálogo de videos por su número de likes
     """
     return model.sortVideosByLikes(catalog)
+
 # Funciones de consulta sobre el catálogo
-def getCategoryId(catalog, categoryname):
+
+def videosSize(catalog):
     """
-    Retorna el 'id' de una categoría por su nombre
+    Número de videos cargados en el catálogo
     """
-    return model.getCategoryId(catalog, categoryname)
+    return model.videosSize(catalog)
+
+def categorySize(catalog):
+    """
+    Número de categorías cargadas en el catálogo
+    """
+    return model.categorySize(catalog)
+
+def getCategoryid(catalog, name):
+    """
+    Retorna el id de una categoría
+    """
+    return model.getCategoryid(catalog, name)
+
+def getVideosByCategory(catalog, category):
+    """
+    Retorna los videos de una categoría específica
+    """
+    return model.getVideosByCategory(catalog, category)
