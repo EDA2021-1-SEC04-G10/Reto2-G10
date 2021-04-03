@@ -24,22 +24,46 @@ import config as cf
 import sys
 import controller
 from DISClib.ADT import list as lt
+from DISClib.ADT import map as mp
+from DISClib.DataStructures import mapentry as me
 assert cf
 
+sys.setrecursionlimit(1000000*10)
 
 """
 La vista se encarga de la interacción con el usuario
-Presenta el menu de opciones y por cada seleccion
+Presenta el menu de opciones y por cada selección
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
+# Funciones para la impresión de resultados
+
+def printSortedVideosByLikes(sortedVideos, sample):
+    """
+    Imprime la información de los videos con mayor número
+    de likes
+    """
+    size = int(lt.size(sortedVideos))
+    if size > sample:
+        index = 1
+        while index <= sample:
+            video = lt.getElement(sortedVideos, index)
+            print("Título: " + video['title'] + "  Canal: " + video['channel_title'] + "  Fecha de publicación: " +
+            video['publish_time'] + "  Views: " + video['views'] + "  Likes: " + video['likes'] + "  Dislikes: " +
+            video['dislikes'])
+            index += 1
+        print()
+
+# Menu de opciones
+
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("1- Cargar información de videos en el catálogo")
+    print("2- Consultar videos con más likes por categoría")
+    print("0- Salir")
 
-catalog = None
+# Funciones de inicialización
 
 def initCatalog():
     """
@@ -51,17 +75,10 @@ def loadData(catalog):
     """
     Carga la información de los videos al catálogo
     """
-    controller.loadData(catalog)
+    return controller.loadData(catalog)
 
-def printFirstVideo(catalog):
-    """
-    Imprime la información del primer video de la lista
-    """
-    firstVideo = lt.firstElement(catalog['videos'])
-    print("El primer video cargado es: ")
-    print("Título: " + firstVideo['title'] + "  Canal: " + firstVideo['channel_title'] +
-    "  Fecha de tendencia: " + firstVideo['trending_date'] + "  País: " + firstVideo['country'] +
-    "  Views: " + firstVideo['views'] + "  Likes: " + firstVideo['likes'] + "  Dislikes: " + firstVideo['dislikes'])
+catalog = None
+
 """
 Menu principal
 """
@@ -72,12 +89,21 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
-        print("El número de videos cargados es: " + str(lt.size(catalog['videos'])))
-        printFirstVideo(catalog)
-        printCategoryList(catalog)
+        print("El total de videos cargados es: " + str(controller.videosSize(catalog)))
+        print("El total de categorías cargadas es: " + str(controller.categorySize(catalog)) + "\n")
+
     elif int(inputs[0]) == 2:
-        categoryname = str(input("Ingrese la categoría\n"))
-        categoryid = controller.getCategoryId(catalog, categoryname)
+        name = str(input("Ingrese el nombre de la categoría\n"))
+        categoryid = controller.getCategoryid(catalog, name)
+        sample = int(input("Ingrese el número de videos a listar\n"))
+        videos = controller.getVideosByCategory(catalog, categoryid)
+        sortedVideos = controller.sortVideosByLikes(videos)
+        if sample > int(lt.size(videos)):
+            print("El número de videos a listar excede el tamaño del catálogo\n")
+        else:
+            print("Los " + str(sample) + " videos con más likes de la categoría " + name + " son: ")
+            printSortedVideosByLikes(sortedVideos, sample)
+
     else:
         sys.exit(0)
 sys.exit(0)
