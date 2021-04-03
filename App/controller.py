@@ -20,6 +20,8 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+import time
+import tracemalloc
 import config as cf
 import model
 import csv
@@ -43,10 +45,27 @@ def initCatalog():
 def loadData(catalog):
     """
     Carga los datos de los archivos y carga los datos
-    en las estructuras de datos
+    en las estructuras de datos. Adicionalmente, retorna
+    el tiempo de procesamiento y la memoria utilizada
     """
+    deltatime = -1.0
+    deltamemory = -1.0
+
+    tracemalloc.start()
+    starttime = getTime()
+    startmemory = getMemory()
+    
     loadVideos(catalog)
     loadCategory(catalog)
+
+    stopmemory = getMemory()
+    stoptime = getTime()
+    tracemalloc.stop()
+
+    deltatime = stoptime - starttime
+    deltamemory = deltaMemory(startmemory, stopmemory)
+    
+    return deltatime, deltamemory
 
 def loadVideos(catalog):
     """
@@ -101,3 +120,29 @@ def getVideosByCategory(catalog, category):
     Retorna los videos de una categoría específica
     """
     return model.getVideosByCategory(catalog, category)
+
+# Funciones para medir tiempo y memoria
+
+def getTime():
+    """
+    Retorna el instante tiempo de procesamiento en milisegundos
+    """
+    return float(time.perf_counter()*1000)
+
+def getMemory():
+    """
+    Toma una muestra de la memoria alocada en instante de tiempo
+    """
+    return tracemalloc.take_snapshot()
+
+def deltaMemory(start_memory, stop_memory):
+    """
+    Calcula la diferencia en memoria alocada del programa entre dos
+    instantes de tiempo y devuelve el resultado en bytes (ej.: 2100.0 B)
+    """
+    memory_diff = stop_memory.compare_to(start_memory, "filename")
+    delta_memory = 0.0
+    for stat in memory_diff:
+        delta_memory = delta_memory + stat.size_diff
+    delta_memory = delta_memory/1024.0
+    return delta_memory
