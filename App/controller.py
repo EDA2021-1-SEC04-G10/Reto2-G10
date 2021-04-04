@@ -47,6 +47,7 @@ def loadData(catalog):
     Carga los datos de los archivos y carga los datos
     en las estructuras de datos. Adicionalmente, retorna
     el tiempo de procesamiento y la memoria utilizada
+    en la carga
     """
     deltatime = -1.0
     deltamemory = -1.0
