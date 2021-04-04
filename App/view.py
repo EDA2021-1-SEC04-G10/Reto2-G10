@@ -91,7 +91,7 @@ while True:
         loadedData = loadData(catalog)
         print("El total de videos cargados es: " + str(controller.videosSize(catalog)))
         print("El total de categorías cargadas es: " + str(controller.categorySize(catalog)) + "\n")
-        print("Tiempo [ms]: " + f"{loadedData[0]:.3f}" + "||" +
+        print("Tiempo [ms]: " + f"{loadedData[0]:.3f}" + "  |  " +
         "Memoria [kB]: " + f"{loadedData[1]:.3f}" + "\n")
 
     elif int(inputs[0]) == 2:
