@@ -1,13 +1,13 @@
 # Reto No. 2 :clapper:
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-blue)](https://www.python.org/)
-[![Visits Badge](https://badges.pufler.dev/visits/EDA2021-1-SEC04-G10/Reto2-G10)](https://badges.pufler.dev)
+![visitors](https://page-views.glitch.me/badge?page_id=EDA2021-1-SEC04-G10.Reto2-G10)
 
 ## Autores :writing_hand:
-* Hernán Buitrago - Req :two:
+* Hernán Buitrago
   * hf.buitrago10@uniandes.edu.co
   * 201512807
-* Daniel Aguilera - Req :three:
+* Daniel Aguilera
   * d.aguilera@uniandes.edu.co
   * 202010592
 
