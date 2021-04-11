@@ -39,6 +39,22 @@ operación solicitada
 
 # Funciones para la impresión de resultados
 
+def printSortedVideosByViews(sortedVideos, sample):
+    """
+    Imprime la información de los videos con mayor número
+    de views
+    """
+    size = int(lt.size(sortedVideos))
+    if size > sample:
+        index = 1
+        while index <= sample:
+            video = lt.getElement(sortedVideos, index)
+            print("Fecha de tendencia: " + video['trending_date'] + "  Título: " + video['title'] + "  Canal: " + 
+            video['channel_title'] + "  Fecha de publicación: " + video['publish_time'] + "  Views: " + 
+            video['views'] + "  Likes: " + video['likes'] + "  Dislikes: " + video['dislikes'])
+            index += 1
+        print()
+
 def printSortedVideosByLikes(sortedVideos, sample):
     """
     Imprime la información de los videos con mayor número
@@ -51,16 +67,41 @@ def printSortedVideosByLikes(sortedVideos, sample):
             video = lt.getElement(sortedVideos, index)
             print("Título: " + video['title'] + "  Canal: " + video['channel_title'] + "  Fecha de publicación: " +
             video['publish_time'] + "  Views: " + video['views'] + "  Likes: " + video['likes'] + "  Dislikes: " +
-            video['dislikes'])
+            video['dislikes'] + "  Tags: " + video['tags'])
             index += 1
         print()
+
+def printFirstVideoByTrendDays(firstVideo, option):
+    """
+    Imprime la información del video con mayor número de
+    días de tendencia
+    """
+    video = lt.firstElement(me.getValue(firstVideo)['videos'])
+    trenddays = me.getValue(firstVideo)['trendingdays']
+    if int(option) == 1:
+        print("Título: " + video['title'] + "  Canal: " + video['channel_title'] + "  País: " +
+        video['country'] + "  Días tendencia: " + str(trenddays) + "\n")
+    elif int(option) == 2:
+        print("Título: " + video['title'] + "  Canal: " + video['channel_title'] + "  Categoría: " +
+        video['category_id'] + "  Días tendencia: " + str(trenddays) + "\n")
+
+def printTimeandMemory(time, memory):
+    """
+    Imprime el tiempo de procesamiento en milisegundos
+    y la memoria alocada en bytes
+    """
+    print("Tiempo [ms]: " + f"{time:.3f}" + "  |  " + "Memoria [kB]: " +
+    f"{memory:.3f}" + "\n")
 
 # Menu de opciones
 
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información de videos en el catálogo")
-    print("2- Consultar videos con más likes por categoría")
+    print("2- Consultar videos tendencia con más views por categoría y país")
+    print("3- Consultar video tendencia por país")
+    print("4- Consultar video tendencia por categoría")
+    print("5- Consultar videos con más likes por país y tag")
     print("0- Salir")
 
 # Funciones de inicialización
@@ -88,23 +129,64 @@ while True:
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
-        loadedData = loadData(catalog)
+        data = loadData(catalog)
         print("El total de videos cargados es: " + str(controller.videosSize(catalog)))
         print("El total de categorías cargadas es: " + str(controller.categorySize(catalog)) + "\n")
-        print("Tiempo [ms]: " + f"{loadedData[0]:.3f}" + "  |  " +
-        "Memoria [kB]: " + f"{loadedData[1]:.3f}" + "\n")
+        printTimeandMemory(data[0], data[1])
 
     elif int(inputs[0]) == 2:
         name = str(input("Ingrese el nombre de la categoría\n"))
         categoryid = controller.getCategoryid(catalog, name)
+        country = str(input("Ingrese el país\n"))
         sample = int(input("Ingrese el número de videos a listar\n"))
-        videos = controller.getVideosByCategory(catalog, categoryid)
-        sortedVideos = controller.sortVideosByLikes(videos)
-        if sample > int(lt.size(videos)):
+        videos = controller.getVideosByCategoryandCountry(catalog, categoryid, country)
+        sortedVideos = controller.sortVideosByViews(videos[0])
+        time = videos[1] + sortedVideos[1]
+        memory = videos[2] + sortedVideos[2]
+        if sample > int(lt.size(videos[0])):
             print("El número de videos a listar excede el tamaño del catálogo\n")
         else:
-            print("Los " + str(sample) + " videos con más likes de la categoría " + name + " son: ")
-            printSortedVideosByLikes(sortedVideos, sample)
+            print("Los " + str(sample) + " videos con más views de la categoría " + name + " de " + 
+            country + " son: ")
+            printSortedVideosByViews(sortedVideos[0], sample)
+            printTimeandMemory(time, memory)
+
+    elif int(inputs[0]) == 3:
+        country = str(input("Ingrese el país\n"))
+        videos = controller.getVideosByCountry(catalog, country)
+        firstVideo = controller.getFirstVideoByTrendDays(videos[0])
+        time = videos[1] + firstVideo[1]
+        memory = videos[2] + firstVideo[2]
+        print("El video con más días tendencia de " + country + " es: ")
+        printFirstVideoByTrendDays(firstVideo[0], 1)
+        printTimeandMemory(time, memory)
+
+    elif int(inputs[0]) == 4:
+        name = str(input("Ingrese el nombre de la categoría\n"))
+        categoryid = controller.getCategoryid(catalog, name)
+        videos = controller.getVideosByCategory(catalog, categoryid)
+        firstVideo = controller.getFirstVideoByTrendDays(videos[0])
+        time = videos[1] + firstVideo[1]
+        memory = videos[2] + firstVideo[2]
+        print("El video con más días tendencia de la categoría " + name + " es: ")
+        printFirstVideoByTrendDays(firstVideo[0], 2)
+        printTimeandMemory(time, memory)
+
+    elif int(inputs[0]) == 5:
+        country = str(input("Ingrese el país\n"))
+        tag = str(input("Ingrese el tag\n"))
+        sample = int(input("Ingrese el número de videos a listar\n"))
+        videos = controller.getVideosByCountryandTag(catalog, country, tag)
+        sortedVideos = controller.sortVideosByLikes(videos[0])
+        time = videos[1] + sortedVideos[1]
+        memory = videos[2] + sortedVideos[2]
+        if sample > int(lt.size(videos[0])):
+            print("El número de videos a listar excede el tamaño del catálogo\n")
+        else:
+            print("Los " + str(sample) + " videos con más likes de " + country + " con el tag " + 
+            tag + " son: ")
+            printSortedVideosByLikes(sortedVideos[0], sample)
+            printTimeandMemory(time, memory)
 
     else:
         sys.exit(0)
