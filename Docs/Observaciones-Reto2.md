@@ -8,7 +8,7 @@
   * d.aguilera@uniandes.edu.co
   * 202010592
 
-## Máquina
+## Máquina :gear:
 
 | | Máquina |
 | --- | --- |
@@ -27,9 +27,9 @@ Para la recolección de datos se promedió el tiempo de ejecución para cada req
 | __Requerimiento 3__ | 5111.147 [ms] | 2148.295 [ms] | -2962.852 [ms] |
 | __Requerimiento 4__ | 1405.217 [ms] | 592.370 [ms] | -812.847 [ms] |
 
-Se observa que los tiempos de ejecución de cada requerimiento son significativamente menores para el reto 2.
+Se observa que los tiempos de ejecución de cada requerimiento son significativamente menores para el reto 2, mientras que el tiempo de ejecución de la carga de datos es considerablemente mayor para el reto 2.
 
-## Memoria
+## Memoria :file_folder:
 Para la recolección de datos se promedió la memoria asignada para cada requerimiento después de ser ejecutado 5 veces. La siguiente tabla muestra los resultados de las pruebas para el reto 1 y el reto 2.
 
 |  | Reto 1 | Reto 2 | Diferencia |
@@ -40,7 +40,7 @@ Para la recolección de datos se promedió la memoria asignada para cada requeri
 | __Requerimiento 3__ | 346.020 [kB] | 25.766 [kB] | -320.254 [kB] |
 | __Requerimiento 4__ | 68.561 [kB] | 54.773 [kB] | -13.788 [kB] |
 
-Se observa que la memoria asignada para cada requerimiento es significativamente menor para el reto 2.
+Se observa que la memoria asignada para cada requerimiento es significativamente menor para el reto 2, mientras que la memoria asignada en la carga de datos es considerablemente mayor para el reto 2.
 
 ## Complejidad :chart_with_upwards_trend:
 Se realizó un análisis de complejidad en el peor caso para cada requerimiento. La siguiente tabla muestra la complejidad temporal de cada requerimiento para el reto 1 y el reto 2.
