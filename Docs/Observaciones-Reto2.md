@@ -59,7 +59,7 @@ Se realizó un análisis de complejidad en el peor caso para cada requerimiento.
 Se observa una disminución de la complejidad para los requerimientos 2 y 3 del reto 2, mientras que los requerimientos 1 y 4 conservan la misma complejidad del reto 1.
 
 ## Colisiones :collision:
-Para la recolección de datos se promedió el tiempo de ejecución y la memoria asignada para la carga de datos después de ser realizada 5 veces. Las siguientes tablas muestran los resultados de las pruebas para cada mecanismo de resolución de colisiones.
+Para la recolección de datos se promedió el tiempo de ejecución y la memoria asignada para la carga de datos después de ser ejecutada 5 veces. Las siguientes tablas muestran los resultados de las pruebas para cada mecanismo de resolución de colisiones.
 
 __Linear Probing__
 
