@@ -51,3 +51,26 @@ Se realizó un análisis de complejidad en el peor caso para cada requerimiento.
 | __Requerimiento 2__ | O(n log n) | O(n) |
 | __Requerimiento 3__ | O(n log n) | O(n) |
 | __Requerimiento 4__ | O(n log n) | O(n log n) |
+
+Se observa una disminución de la complejidad para los requerimientos 2 y 3 del reto 2, mientras que los requerimientos 1 y 4 conservan la misma complejidad del reto 1.
+
+## Colisiones :collision:
+Para la recolección de datos se promedió el tiempo de ejecución y la memoria asignada para la carga de datos después de ser ejecutada 5 veces. Las siguientes tablas muestran los resultados de las pruebas para cada mecanismo de resolución de colisiones.
+
+__Linear Probing__
+
+| Factor de carga | Tiempo | Memoria |
+| --- | --- | --- |
+| __0.30__ | 74200.131 [ms] | 1427564.975 [kB] |
+| __0.50__ | 82126.881 [ms] | 1427564.975 [kB] |
+| __0.80__ | 85293.107 [ms] | 1427564.975 [kB] |
+
+__Separate Chaining__
+
+| Factor de carga | Tiempo | Memoria |
+| --- | --- | --- |
+| __2.0__ | 85353.219 [ms] | 1511089.445 [kB] |
+| __4.0__ | 85310.089 [ms] | 1511089.445 [kB] |
+| __6.0__ | 88065.329 [ms] | 1511089.445 [kB] |
+
+Se observa que el tiempo de ejecución y la memoria asignada para la carga de datos es menor para linear probing con un tiempo de ejecución promedio menor para el factor de carga de 0.30.
