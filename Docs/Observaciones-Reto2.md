@@ -27,7 +27,9 @@ Para la recolección de datos se promedió el tiempo de ejecución para cada req
 | __Requerimiento 3__ | 5111.147 [ms] | 2148.295 [ms] | -2962.852 [ms] |
 | __Requerimiento 4__ | 1405.217 [ms] | 592.370 [ms] | -812.847 [ms] |
 
-Se observa que los tiempos de ejecución de cada requerimiento son significativamente menores para el reto 2, mientras que el tiempo de ejecución de la carga de datos es considerablemente mayor para el reto 2.
+Se observa que los tiempos de ejecución de cada requerimiento son significativamente menores para el reto 2, mientras que el tiempo de ejecución de la carga de datos es considerablemente mayor para el reto 2. 
+
+Este comportamiento es el esperado considerando que la creación de índices en la carga de datos requiere de mayor tiempo de ejecución, pero las busquedas realizadas por índices requieren de menor tiempo de ejecución que las comparaciones sobre elementos de una lista.
 
 ## Memoria :file_folder:
 Para la recolección de datos se promedió la memoria asignada para cada requerimiento después de ser ejecutado 5 veces. La siguiente tabla muestra los resultados de las pruebas para el reto 1 y el reto 2.
@@ -42,6 +44,8 @@ Para la recolección de datos se promedió la memoria asignada para cada requeri
 
 Se observa que la memoria asignada para cada requerimiento es significativamente menor para el reto 2, mientras que la memoria asignada en la carga de datos es considerablemente mayor para el reto 2.
 
+Este comportamiento es el esperado considerando que la creación de índices en la carga de datos requiere de una mayor asignación de memoria.
+
 ## Complejidad :chart_with_upwards_trend:
 Se realizó un análisis de complejidad en el peor caso para cada requerimiento. La siguiente tabla muestra la complejidad temporal de cada requerimiento para el reto 1 y el reto 2.
 
@@ -55,7 +59,7 @@ Se realizó un análisis de complejidad en el peor caso para cada requerimiento.
 Se observa una disminución de la complejidad para los requerimientos 2 y 3 del reto 2, mientras que los requerimientos 1 y 4 conservan la misma complejidad del reto 1.
 
 ## Colisiones :collision:
-Para la recolección de datos se promedió el tiempo de ejecución y la memoria asignada para la carga de datos después de ser ejecutada 5 veces. Las siguientes tablas muestran los resultados de las pruebas para cada mecanismo de resolución de colisiones.
+Para la recolección de datos se promedió el tiempo de ejecución y la memoria asignada para la carga de datos después de ser realizada 5 veces. Las siguientes tablas muestran los resultados de las pruebas para cada mecanismo de resolución de colisiones.
 
 __Linear Probing__
 
@@ -73,4 +77,4 @@ __Separate Chaining__
 | __4.0__ | 85310.089 [ms] | 1511089.445 [kB] |
 | __6.0__ | 88065.329 [ms] | 1511089.445 [kB] |
 
-Se observa que el tiempo de ejecución y la memoria asignada para la carga de datos es menor para linear probing con un tiempo de ejecución promedio menor para el factor de carga de 0.30.
+Se observa que el tiempo de ejecución y la memoria asignada para la carga de datos es menor para *linear probing* con un tiempo de ejecución promedio menor para el factor de carga de 0.30.
