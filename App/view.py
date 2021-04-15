@@ -61,14 +61,19 @@ def printSortedVideosByLikes(sortedVideos, sample):
     de likes
     """
     size = int(lt.size(sortedVideos))
+    videos = lt.newList('ARRAY_LIST')
     if size > sample:
         index = 1
+        position = 1
         while index <= sample:
-            video = lt.getElement(sortedVideos, index)
-            print("Título: " + video['title'] + "  Canal: " + video['channel_title'] + "  Fecha de publicación: " +
-            video['publish_time'] + "  Views: " + video['views'] + "  Likes: " + video['likes'] + "  Dislikes: " +
-            video['dislikes'] + "  Tags: " + video['tags'])
-            index += 1
+            video = lt.getElement(sortedVideos, position)
+            if lt.isPresent(videos, video['video_id']) == 0:
+                print("Título: " + video['title'] + "  Canal: " + video['channel_title'] + "  Fecha de publicación: " +
+                video['publish_time'] + "  Views: " + video['views'] + "  Likes: " + video['likes'] + "  Dislikes: " +
+                video['dislikes'] + "  Tags: " + video['tags'])
+                lt.addLast(videos, video['video_id'])
+                index += 1
+            position += 1
         print()
 
 def printFirstVideoByTrendDays(firstVideo, option):
